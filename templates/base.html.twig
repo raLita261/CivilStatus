@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" scale="viewport">
+
+    <title>Projet Sanda</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{{asset('img/favicon.png')}}" rel="icon">
+    <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+    <!-- Vendor Css -->
+    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/ionicons/css/ionicons.min.css" rel="stylesheet')}}">
+    <link href="{{asset('vendor/owl.carousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/venobox/venobox.css')}}" rel="stylesheet">
+
+    <!-- Msin Css-->
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
+        <title>{% block title %}Projet Sanda{% endblock %}</title>
+       <!--   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">-->
+        {% block stylesheets %}
+<style>
+.tanana{
+  color:inherit;
+  cursor:pointer;
+}
+.home__menu{ 
+  color:white;
+  transition: transform .2s;
+  width:20%;
+}
+.home__menu:hover{
+    color:red !important;
+  transform: scale(1.1) !important;
+}
+.avatar{
+  height:190px;
+  width:100px;
+}
+</style>
+        {% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </head>
+    <body>
+    
+
+   {% include 'nav.html.twig' %}
+
+    
+        {% block body %}{% endblock %}
+         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>-->
+    
+    
+    <!-- Vendor JS -->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('vendor/jquery.easing/jquery.easing.min.js')}}"></script>
+    <script src="{{asset('vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{asset('vendor/waypoints/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('vendor/counterup/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('vendor/owl.carousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('vendor/typed.js/typed.min.js')}}"></script>
+    <script src="{{asset('vendor/venobox/venobox.min.js')}}"></script>
+
+    <!-- Main JS -->
+    <script src="{{asset('js/main.js')}}"></script>
+    </body>
+</html>

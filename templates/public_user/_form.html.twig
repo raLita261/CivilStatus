@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+<label>Nom</label>
+    {{ form_widget(form.FName) }}
+    <label>Prénom</label>
+      {{ form_widget(form.LName) }} {#input#}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
