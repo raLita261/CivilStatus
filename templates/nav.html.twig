@@ -12,13 +12,14 @@ body{
 }
 nav{
   position:fixed;
+  top:0;
   z-index:2;
   background: #fff;
   height: 70px;
   width: 100%;
 }
 label.logo{
-  color: #0082e6;
+  color: #1E1E1E;
   font-size: 35px;
   line-height: 80px;
   padding: 0 100px;
@@ -101,6 +102,9 @@ section{
   background-size: cover;
   height: calc(100vh - 80px);
 }
+.fas{
+  color: #1b1b1b!important;
+}
 
         </style>
  {% endblock %}
@@ -110,14 +114,14 @@ section{
       <label for="check" class="checkbtn">
         <i class="fas fa-bars"></i>
       </label>
-      <label class="logo">DesignX</label>
+      <label class="logo">Civil Status services</label>
       <ul>
         {% if app.user %}
         <li><a class="" href="{{ path('app_login') }}">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="{{ path('public_user_index') }}">List </a></li>
         <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="{{ path('app_logout') }}">Logout</a></li>
+        <li>{{app.user.username}}</li>
+        <li><a class="btn btn-danger" href="{{ path('app_logout') }}">Logout</a></li>
          {% endif %}
       </ul>
     </nav>

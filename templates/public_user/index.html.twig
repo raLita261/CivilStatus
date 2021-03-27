@@ -1,73 +1,134 @@
 {% extends 'base.html.twig' %}
- {% block stylesheets %}
- <style>
- .container{
-display:flex;
-justify-content:center;
-flex-direction:column;
- }
- .table>thead{
-     color:red;
-     text-align:left;
- }
- </style>
- {% endblock %}
+{% block stylesheets %}
+  <style>
+    .container{ display:flex; justify-content:center; flex-direction:column; }
+    .table>thead{ color:red; text-align:left; }
+  </style>
+{% endblock %}
 
-        {% block javascripts %}
-        <script></script>{% endblock %}
-{% block title %}PublicUser index{% endblock %}
+{% block javascripts %}
+  <script></script>
+{% endblock %}
+{% block title %}
+  PublicUser index
+{% endblock %}
 
 {% block body %}
-
-
-<div class="container mt-2">
-
-    <h1>PublicUser index</h1>
+  <div class="container mt-2">
+    <h1>
+      PublicUser index
+    </h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FName</th>
-                <th>LName</th>
-                <th>DoB</th>
-                <th>FatherName</th>
-                <th>MotherName</th>
-                <th>Status</th>
-                <th>DoD</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+      <thead>
+        <tr>
+          <th>
+            Id
+          </th>
+          <th>
+            FName
+          </th>
+          <th>
+            LName
+          </th>
+          <th>
+            DoB
+          </th>
+          <th>
+            FatherName
+          </th>
+          <th>
+            MotherName
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            DoD
+          </th>
+          <th>
+            actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
         {% for public_user in public_users %}
-            <tr>
-                <td>{{ public_user.id }}</td>
-                <td>{{ public_user.FName }}</td>
-                <td>{{ public_user.LName }}</td>
-                <td>{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}</td>
-                <td>{{ public_user.FatherName }}</td>
-                <td>{{ public_user.MotherName }}</td>
-                <td>{{ public_user.Status ? 'Yes' : 'No' }}</td>
-                <td>{{ public_user.DoD ? public_user.DoD|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a class="btn btn-info" href="{{ path('public_user_show', {'id': public_user.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('public_user_edit', {'id': public_user.id}) }}">edit</a>
-                    <a class="btn btn-primary" href=" {{path('make_pdf', {'id': public_user.id})}} "><span class="material-icons ">PDF</span></a>
-                </td>
-            </tr>
+          <tr>
+            <td>
+              {{ public_user.id }}
+            </td>
+            <td>
+              {{ public_user.FName }}
+            </td>
+            <td>
+              {{ public_user.LName }}
+            </td>
+            <td>
+              {{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}
+            </td>
+            <td>
+              {{ public_user.FatherName }}
+            </td>
+            <td>
+              {{ public_user.MotherName }}
+            </td>
+            <td>
+              {{ public_user.Status ? 'Yes' : 'No' }}
+            </td>
+            <td>
+              {{ public_user.DoD ? public_user.DoD|date('Y-m-d') : '' }}
+            </td>
+            <td>
+              <a class="btn btn-info"
+                href="{{
+                path(
+                  'public_user_show',
+                  {
+                    id: public_user.id
+                  }
+                )
+                }}">
+                show
+              </a>
+              <a class="btn btn-warning"
+                href="{{
+                path(
+                  'public_user_edit',
+                  {
+                    id: public_user.id
+                  }
+                )
+                }}">
+                edit
+              </a>
+              <a class="btn btn-primary"
+                href=" {{
+                path(
+                  'make_pdf',
+                  {
+                    id: public_user.id
+                  }
+                )
+                }} ">
+                <span class="material-icons">PDF</span>
+              </a>
+            </td>
+          </tr>
         {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
+          <tr>
+            <td colspan="9">
+              no records found
+            </td>
+          </tr>
         {% endfor %}
-        </tbody>
+      </tbody>
     </table>
 
     <a href="{{ path('public_user_new') }}">Create new</a>
-   {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
+    {% if app.user %}
+      <div class="mb-3">
+        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+      </div>
     {% endif %}
-    </div>
+  </div>
 {% endblock %}
