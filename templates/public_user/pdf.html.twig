@@ -1,22 +1,30 @@
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Birth Certficate</title>
-    </head>
-    <body>
-        <h4 align= 'center'>REPUBLIQUE DE MADAGASCAR</h4>
-        <h5 align= 'center'>FITIAVANA - TANINDRAZANA - FANDROASOANA</h5><br>
+	<head>
+		<meta charset="UTF-8">
+		<title>Birth Certficate</title>
+	</head>
+	<body>
+		<h4 align='center'>REPUBLIQUE DE MADAGASCAR</h4>
+		<h5 align='center'>FITIAVANA - TANINDRAZANA - FANDROASOANA</h5><br>
 
-        <h4 align= 'center'>COMMUNE URBAINE </h4>
-        <h4 align= 'center'>COPIE D' ACTE D' ETAT CIVIL </h4><br>
+		<h4 align='center'>COMMUNE URBAINE
+		</h4>
+		<h4 align='center'>COPIE D' ACTE D' ETAT CIVIL
+		</h4><br>
 
-        <h5 align= 'center'>COPIE D'ACTE D'ETAT CIVIL<h5><br>
+		<h5 align='center'>COPIE D'ACTE D'ETAT CIVIL<h5><br>
 
-        <p align='center'>Naissance de {{publicUser.FName}} {{publicUser.LName}}</p>
+				<p align='center'>Naissance de
+					{{publicUser.FName}}
+					{{publicUser.LName}}</p>
 
-        <p>
-            Naissance de {{publicUser.FName}} {{publicUser.LName}}....
-
-        </p>
-    </body>
+				<p>
+					Naissance de
+					{{publicUser.FName}}
+					{{publicUser.LName}}....
+					{#{% if publicUser.father == null %} N/A {%else%} {{publicUser.father.LastName}}{%endif%} #}
+				</p>
+			</body>
+		</html>
+	</body>
 </html>

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParentUser index{% endblock %}
+
+{% block body %}
+    <h1>ParentUser index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>Occupation</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for parent_user in parent_users %}
+            <tr>
+                <td>{{ parent_user.id }}</td>
+                <td>{{ parent_user.LastName }}</td>
+                <td>{{ parent_user.FirstName }}</td>
+                <td>{{ parent_user.Occupation }}</td>
+                <td>{{ parent_user.Address }}</td>
+                <td>{{ parent_user.Gender ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('parent_user_show', {'id': parent_user.id}) }}">show</a>
+                    <a href="{{ path('parent_user_edit', {'id': parent_user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('parent_user_new') }}">Create new</a>
+{% endblock %}

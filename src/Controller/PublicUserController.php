@@ -14,7 +14,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 /**
- * @Route("/user")
+ * @Route("/publicuser")
  */
 class PublicUserController extends AbstractController
 {
@@ -33,12 +33,16 @@ class PublicUserController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $publicUser = new PublicUser();
         $form = $this->createForm(PublicUserType::class, $publicUser);
         $form->handleRequest($request);
 
+        //select all from parentUser
+        $listeAllParent = $entityManager->getRepository('App:ParentUser')->findAll();
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager = $this->getDoctrine()->getManager();
             //generate rand num
             $publicUser->setVerificationCode(rand());
             $entityManager->persist($publicUser);
@@ -50,6 +54,7 @@ class PublicUserController extends AbstractController
         return $this->render('public_user/new.html.twig', [
             'public_user' => $publicUser,
             'form' => $form->createView(),
+            'allParentUser' => $listeAllParent
         ]);
     }
 
@@ -88,7 +93,7 @@ class PublicUserController extends AbstractController
      */
     public function delete(Request $request, PublicUser $publicUser): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$publicUser->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $publicUser->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($publicUser);
             $entityManager->flush();
@@ -97,39 +102,39 @@ class PublicUserController extends AbstractController
         return $this->redirectToRoute('public_user_index');
     }
 
-     /**
+    /**
      * @Route("/{id}/pdf", name="make_pdf", methods={"GET"})
      */
-   public function makePdf(Request $request , PublicUser $publicUser)
-   {
-       //entity manager
-    $entityManager = $this->getDoctrine()->getManager();
-   
-       // Configure Dompdf according to your needs
-       $pdfOptions = new Options();
-       $pdfOptions->set('defaultFont', 'Arial');
-       
-       // Instantiate Dompdf with our options
-       $dompdf = new Dompdf($pdfOptions);
-       
-       // Retrieve the HTML generated in our twig file
-       $html = $this->renderView('public_user/pdf.html.twig', [
-           'title' => "Welcome to our PDF Test",
-           'publicUser' => $publicUser,
-       ]);
-       
-       // Load HTML to Dompdf
-       $dompdf->loadHtml($html);
-       
-       // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-       $dompdf->setPaper('A4', 'portrait');
+    public function makePdf(Request $request, PublicUser $publicUser)
+    {
+        //entity manager
+        $entityManager = $this->getDoctrine()->getManager();
 
-       // Render the HTML as PDF
-       $dompdf->render();
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
 
-       // Output the generated PDF to Browser (inline view)
-       $dompdf->stream("mypdf.pdf", [
-           "Attachment" => false
-       ]);
-   }
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('public_user/pdf.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'publicUser' => $publicUser,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
 }

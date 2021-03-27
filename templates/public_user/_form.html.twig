@@ -1,7 +1,64 @@
 {{ form_start(form) }}
 <label>Nom</label>
-    {{ form_widget(form.FName) }}
-    <label>Prénom</label>
-      {{ form_widget(form.LName) }} {#input#}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_widget(form.FName) }}
+<label>Prénom</label>
+{{ form_widget(form.LName) }}
+
+<label>Date of Birth</label>
+{{ form_widget(form.DoB) }}
+
+<label>Place of Birth</label>
+{{ form_widget(form.placeOfBirth) }}
+
+<label>Is Alive</label>
+{{ form_widget(form.isAlive) }}
+
+
+{% for parent in allParentUser %}
+
+	<table id="example" class="table table-striped table-bordered" style="width:100%">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Age</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Tiger Nixon</td>
+				<td>System Architect</td>
+				<td>Edinburgh</td>
+				<td>61</td>
+				<td>2011/04/25</td>
+				<td>$320,800</td>
+			</tr>
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>Name</th>
+				<th>Position</th>
+				<th>Office</th>
+				<th>Age</th>
+				<th>Start date</th>
+				<th>Salary</th>
+			</tr>
+		</tfoot>
+	</table>
+
+{% endfor %}
+
+
+<label>Father</label>
+{{ form_widget(form.father) }}
+
+<label>Mother</label>
+{{ form_widget(form.mother) }}
+
+
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

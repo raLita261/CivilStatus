@@ -1,11 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New PublicUser{% endblock %}
+{% block title %}New PublicUser
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+	<script>
+		$(document).ready(function () {
+$('#example').DataTable();
+});
+	</script>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new PublicUser</h1>
+	<h1>Create new PublicUser</h1>
 
-    {{ include('public_user/_form.html.twig') }}
+	{{ form_start(form) }}
+	<label>Nom</label>
+	{{ form_widget(form.FName) }}
+	<label>Prénom</label>
+	{{ form_widget(form.LName) }}
 
-    <a href="{{ path('public_user_index') }}">back to list</a>
+	<label>Date of Birth</label>
+	{{ form_widget(form.DoB) }}
+
+	<label>Place of Birth</label>
+	{{ form_widget(form.placeOfBirth) }}
+
+	<label>Is Alive</label>
+	{{ form_widget(form.isAlive) }}
+
+	{# table parent #}
+	<table id="example" class="table table-striped table-bordered" style="width:100%">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Last Name</th>
+				<th>First Name</th>
+				<th>Occupation</th>
+				<th>Address</th>
+				<th>Gender</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for parent in allParentUser %}
+				<tr>
+					<td>{{parent.id}}</td>
+					<td>{{parent.LastName}}</td>
+					<td>{{parent.FirstName}}</td>
+					<td>{{parent.Occupation}}</td>
+					<td>{{parent.Address}}</td>
+					<td>
+						{% if parent.Gender == true %}
+							Male
+						{% else %}
+							Female
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+
+	<button>
+		<a href="{{ path('parent_user_new') }}">Add New Parent Info</a>
+	</button>
+
+
+	<label>Father</label>
+	{{ form_widget(form.father) }}
+
+	<label>Mother</label>
+	{{ form_widget(form.mother) }}
+
+
+	<button class="btn">{{ button_label|default('Save') }}</button>
+	{{ form_end(form) }}
+
+
+	<a href="{{ path('public_user_index') }}">back to list</a>
 {% endblock %}

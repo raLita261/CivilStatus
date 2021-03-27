@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParentUser{% endblock %}
+
+{% block body %}
+    <h1>ParentUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ parent_user.id }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ parent_user.LastName }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ parent_user.FirstName }}</td>
+            </tr>
+            <tr>
+                <th>Occupation</th>
+                <td>{{ parent_user.Occupation }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ parent_user.Address }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ parent_user.Gender ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('parent_user_index') }}">back to list</a>
+
+    <a href="{{ path('parent_user_edit', {'id': parent_user.id}) }}">edit</a>
+
+    {{ include('parent_user/_delete_form.html.twig') }}
+{% endblock %}

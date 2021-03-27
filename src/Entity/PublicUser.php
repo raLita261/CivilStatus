@@ -28,35 +28,44 @@ class PublicUser
     private $LName;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $DoB;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $FatherName;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $MotherName;
+    private $placeOfBirth;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $Status;
+    private $isAlive;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $DoD;
 
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     private $VerificationCode;
+
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ParentUser")
+     */
+    private $father;
+
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ParentUser")
+     */
+    private $mother;
 
     public function getId(): ?int
     {
@@ -99,38 +108,26 @@ class PublicUser
         return $this;
     }
 
-    public function getFatherName(): ?string
+    public function getPlaceOfBirth(): ?string
     {
-        return $this->FatherName;
+        return $this->placeOfBirth;
     }
 
-    public function setFatherName(string $FatherName): self
+    public function setPlaceOfBirth(string $placeOfBirth): self
     {
-        $this->FatherName = $FatherName;
+        $this->placeOfBirth = $placeOfBirth;
 
         return $this;
     }
 
-    public function getMotherName(): ?string
+    public function getIsAlive(): ?bool
     {
-        return $this->MotherName;
+        return $this->isAlive;
     }
 
-    public function setMotherName(string $MotherName): self
+    public function setIsAlive(bool $isAlive): self
     {
-        $this->MotherName = $MotherName;
-
-        return $this;
-    }
-
-    public function getStatus(): ?bool
-    {
-        return $this->Status;
-    }
-
-    public function setStatus(bool $Status): self
-    {
-        $this->Status = $Status;
+        $this->isAlive = $isAlive;
 
         return $this;
     }
@@ -155,6 +152,30 @@ class PublicUser
     public function setVerificationCode(int $VerificationCode): self
     {
         $this->VerificationCode = $VerificationCode;
+
+        return $this;
+    }
+
+    public function getFather(): ?ParentUser
+    {
+        return $this->father;
+    }
+
+    public function setFather(?ParentUser $father): self
+    {
+        $this->father = $father;
+
+        return $this;
+    }
+
+    public function getMother(): ?ParentUser
+    {
+        return $this->mother;
+    }
+
+    public function setMother(?ParentUser $mother): self
+    {
+        $this->mother = $mother;
 
         return $this;
     }
