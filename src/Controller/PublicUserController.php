@@ -23,8 +23,15 @@ class PublicUserController extends AbstractController
      */
     public function index(PublicUserRepository $publicUserRepository): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $qb = $entityManager->createQueryBuilder();
+        $selectedUserAlive = $qb->select('u')
+            ->from('App:PublicUser', 'u')
+            ->where('u.DoD IS NULL')
+            ->getQuery()
+            ->getResult();
         return $this->render('public_user/index.html.twig', [
-            'public_users' => $publicUserRepository->findAll(),
+            'public_users' => $selectedUserAlive,
         ]);
     }
 
@@ -73,8 +80,12 @@ class PublicUserController extends AbstractController
      */
     public function edit(Request $request, PublicUser $publicUser): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
         $form = $this->createForm(PublicUserType::class, $publicUser);
         $form->handleRequest($request);
+        //select all from parentUser
+        $listeAllParent = $entityManager->getRepository('App:ParentUser')->findAll();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -85,6 +96,7 @@ class PublicUserController extends AbstractController
         return $this->render('public_user/edit.html.twig', [
             'public_user' => $publicUser,
             'form' => $form->createView(),
+            'allParentUser' => $listeAllParent
         ]);
     }
 

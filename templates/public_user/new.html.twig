@@ -10,76 +10,110 @@
 	<script>
 		$(document).ready(function () {
 $('#example').DataTable();
+$(".dead").hide();
+$("#public_user_isAlive").change(function () {
+if ($(this).val() == 1) {
+$(".dead").hide();
+} else {
+$(".dead").show();
+}
+});
+
 });
 	</script>
 {% endblock %}
 
+{% block stylesheets %}
+	<style>
+		label {
+			color: black !important;
+		}
+		.birthDetails {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	</style>
+{% endblock %}
+
 {% block body %}
-	<h1>Create new PublicUser</h1>
+	<div class="container" style="margin-top:100px">
+		<div class="row justify-content-center">
+			<h1>Create new PublicUser</h1>
+		</div>
+		<div class="row justify-content-center">
+			{{ form_start(form) }}
+			<label>Nom</label>
+			{{ form_widget(form.FName) }}
+			<label>Prénom</label>
+			{{ form_widget(form.LName) }}
 
-	{{ form_start(form) }}
-	<label>Nom</label>
-	{{ form_widget(form.FName) }}
-	<label>Prénom</label>
-	{{ form_widget(form.LName) }}
+			<label>Date of Birth</label>
+			{{ form_widget(form.DoB) }}
 
-	<label>Date of Birth</label>
-	{{ form_widget(form.DoB) }}
+			<label>Place of Birth</label>
+			{{ form_widget(form.placeOfBirth) }}
 
-	<label>Place of Birth</label>
-	{{ form_widget(form.placeOfBirth) }}
+			<label>Is Alive</label>
+			{{ form_widget(form.isAlive) }}
+			<div class="dead">
+				<label>Death Details</label>
+				{{ form_widget(form.DoD) }}
+			</div>
 
-	<label>Is Alive</label>
-	{{ form_widget(form.isAlive) }}
-
-	{# table parent #}
-	<table id="example" class="table table-striped table-bordered" style="width:100%">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Last Name</th>
-				<th>First Name</th>
-				<th>Occupation</th>
-				<th>Address</th>
-				<th>Gender</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for parent in allParentUser %}
-				<tr>
-					<td>{{parent.id}}</td>
-					<td>{{parent.LastName}}</td>
-					<td>{{parent.FirstName}}</td>
-					<td>{{parent.Occupation}}</td>
-					<td>{{parent.Address}}</td>
-					<td>
-						{% if parent.Gender == true %}
-							Male
-						{% else %}
-							Female
-						{% endif %}
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-
-	<button>
-		<a href="{{ path('parent_user_new') }}">Add New Parent Info</a>
-	</button>
-
-
-	<label>Father</label>
-	{{ form_widget(form.father) }}
-
-	<label>Mother</label>
-	{{ form_widget(form.mother) }}
+			{# table parent #}
+			<div class="birthDetails">
+				<table id="example" class="table table-striped table-bordered" style="width:100%">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Last Name</th>
+							<th>First Name</th>
+							<th>Occupation</th>
+							<th>Address</th>
+							<th>Gender</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for parent in allParentUser %}
+							<tr>
+								<td>{{parent.id}}</td>
+								<td>{{parent.LastName}}</td>
+								<td>{{parent.FirstName}}</td>
+								<td>{{parent.Occupation}}</td>
+								<td>{{parent.Address}}</td>
+								<td>
+									{% if parent.Gender == true %}
+										Male
+									{% else %}
+										Female
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 
 
-	<button class="btn">{{ button_label|default('Save') }}</button>
-	{{ form_end(form) }}
+				<a class="btn btn-info" href="{{ path('parent_user_new') }}">Add New Parent Info</a>
+				<div>
+					<label>Father</label>
+					{{ form_widget(form.father) }}
+
+					<label>Mother</label>
+					{{ form_widget(form.mother) }}
+				</div>
+
+				<button class="btn btn-success">Save new Person Birth</button>
+				{{ form_end(form) }}
+			</div>
 
 
-	<a href="{{ path('public_user_index') }}">back to list</a>
+		</div>
+		<div class="row justify-content-center">
+			<a class="btn btn-info" href="{{ path('public_user_index') }}">back to list</a>
+
+		</div>
+	</div>
+
 {% endblock %}

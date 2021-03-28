@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/parent/user")
+ * @Route("/birth")
  */
 class ParentUserController extends AbstractController
 {
@@ -39,7 +39,7 @@ class ParentUserController extends AbstractController
             $entityManager->persist($parentUser);
             $entityManager->flush();
 
-            return $this->redirectToRoute('parent_user_index');
+            return $this->redirectToRoute('public_user_new');
         }
 
         return $this->render('parent_user/new.html.twig', [
@@ -83,7 +83,7 @@ class ParentUserController extends AbstractController
      */
     public function delete(Request $request, ParentUser $parentUser): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$parentUser->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $parentUser->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($parentUser);
             $entityManager->flush();

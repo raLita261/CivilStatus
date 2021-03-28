@@ -5,6 +5,7 @@
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
+			min-height: 100vh;
 		}
 		.table > thead {
 			color: red;
@@ -14,7 +15,14 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script></script>
+
+	<script>
+		$(document).ready(function () {
+$('#example').DataTable();
+
+
+});
+	</script>
 {% endblock %}
 {% block title %}
 	PublicUser index
@@ -26,20 +34,20 @@
 			PublicUser index
 		</h1>
 
-		<table class="table">
+		<table class="table" id="example">
 			<thead>
 				<tr>
 					<th>
 						Id
 					</th>
 					<th>
-						FName
+						Fist Name
 					</th>
 					<th>
-						LName
+						Last Name
 					</th>
 					<th>
-						DoB
+						Date of birth
 					</th>
 					<th>
 						FatherName
@@ -47,12 +55,7 @@
 					<th>
 						MotherName
 					</th>
-					<th>
-						Status
-					</th>
-					<th>
-						DoD
-					</th>
+
 					<th>
 						actions
 					</th>
@@ -93,22 +96,23 @@
 							{% endif %}
 
 						</td>
+
 						<td>
-							{{ public_user.isAlive ? 'Yes' : 'No' }}
-						</td>
-						<td>
-							{{ public_user.DoD ? public_user.DoD|date('Y-m-d') : '' }}
-						</td>
-						<td>
-							<a class="btn btn-info" href="{{ path( 'public_user_show', { id: public_user.id } ) }}">
-								show
-							</a>
-							<a class="btn btn-warning" href="{{ path( 'public_user_edit', { id: public_user.id } ) }}">
-								edit
-							</a>
-							<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
-								<span class="material-icons">PDF</span>
-							</a>
+							{% if app.user == null %}
+								<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
+									<span class="material-icons">PDF</span>
+								</a>
+							{% else %}
+								<a class="btn btn-info" href="{{ path( 'public_user_show', { id: public_user.id } ) }}">
+									show
+								</a>
+								<a class="btn btn-warning" href="{{ path( 'public_user_edit', { id: public_user.id } ) }}">
+									edit
+								</a>
+								<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
+									<span class="material-icons">PDF</span>
+								</a>
+							{% endif %}
 						</td>
 					</tr>
 				{% else %}
@@ -120,8 +124,13 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		{% if app.user == null %}
 
-		<a href="{{ path('public_user_new') }}">Create new</a>
+			{% else %}
+				<a href="{{ path('public_user_new') }}">Create new</a>
+		{% endif %}
+
+
 		{% if app.user %}
 			<div class="mb-3">
 				You are logged in as
