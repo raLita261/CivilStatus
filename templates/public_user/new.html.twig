@@ -19,8 +19,11 @@ $(".dead").show();
 }
 });
 
+$('.datepicker').datepicker()
+
 });
 	</script>
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -37,22 +40,38 @@ $(".dead").show();
 {% endblock %}
 
 {% block body %}
-	<div class="container" style="margin-top:100px">
+	<div class="container" style="margin-top:150px">
 		<div class="row justify-content-center">
-			<h1>Create new PublicUser</h1>
+			<h3>Create new PublicUser</h3>
 		</div>
 		<div class="row justify-content-center">
 			{{ form_start(form) }}
-			<label>Nom</label>
-			{{ form_widget(form.FName) }}
-			<label>Prénom</label>
-			{{ form_widget(form.LName) }}
 
-			<label>Date of Birth</label>
-			{{ form_widget(form.DoB) }}
+			<div class="form-group">
+				<label for="exampleInputEmail1">First Name</label>
+				{{ form_widget(form.FName,{'attr':{'class':'form-control'}}) }}
 
-			<label>Place of Birth</label>
-			{{ form_widget(form.placeOfBirth) }}
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputEmail1">Last Name</label>
+				{{ form_widget(form.LName,{'attr':{'class':'form-control'}}) }}
+
+			</div>
+
+
+			<div class="form-group">
+				<label for="exampleInputEmail1">Date of Birth</label>
+				{{ form_widget(form.DoB,{'attr':{'class':'datepicker'}}) }}
+
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputEmail1">Place of Birth</label>
+				{{ form_widget(form.placeOfBirth,{'attr':{'class':'form-control'}}) }}
+
+			</div>
+
 
 			<label>Is Alive</label>
 			{{ form_widget(form.isAlive) }}

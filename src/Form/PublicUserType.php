@@ -10,6 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 class PublicUserType extends AbstractType
 {
@@ -19,7 +21,10 @@ class PublicUserType extends AbstractType
             ->add('FName')
             ->add('LName')
             ->add('placeOfBirth')
-            ->add('DoB')
+            ->add('DoB', DateTimeType::class, [
+                'widget' => 'single_text',
+                'input'  => 'datetime_immutable'
+            ])
             ->add('father', EntityType::class, [
                 // looks for choices from this entity
                 'class' => ParentUser::class,
@@ -50,7 +55,10 @@ class PublicUserType extends AbstractType
                     "Dead" => false
                 ],
             ])
-            ->add('DoD');
+            ->add('DoD', DateTimeType::class, [
+                'widget' => 'single_text',
+                'input'  => 'datetime_immutable'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

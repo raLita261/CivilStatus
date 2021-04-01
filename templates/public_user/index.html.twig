@@ -29,10 +29,10 @@ $('#example').DataTable();
 {% endblock %}
 
 {% block body %}
-	<div class="container mt-2">
-		<h1>
-			PublicUser index
-		</h1>
+	<div class="container" style="margin-top:150px">
+		<h3>
+			User List
+		</h3>
 
 		<table class="table" id="example">
 			<thead>
@@ -127,16 +127,9 @@ $('#example').DataTable();
 		{% if app.user == null %}
 
 			{% else %}
-				<a href="{{ path('public_user_new') }}">Create new</a>
+				<a class="btn btn-primary" href="{{ path('public_user_new') }}">Create new</a>
 		{% endif %}
 
 
-		{% if app.user %}
-			<div class="mb-3">
-				You are logged in as
-				{{ app.user.username }},
-				<a href="{{ path('app_logout') }}">Logout</a>
-			</div>
-		{% endif %}
 	</div>
 {% endblock %}
