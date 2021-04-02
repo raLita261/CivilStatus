@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/birth")
+ * @Route("/parent")
  */
 class ParentUserController extends AbstractController
 {
@@ -39,7 +39,7 @@ class ParentUserController extends AbstractController
             $entityManager->persist($parentUser);
             $entityManager->flush();
 
-            return $this->redirectToRoute('public_user_new');
+            return $this->redirectToRoute('parent_user_new');
         }
 
         return $this->render('parent_user/new.html.twig', [

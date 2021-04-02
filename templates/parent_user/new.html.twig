@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ParentUser{% endblock %}
+{% block title %}New ParentUser
+{% endblock %}
 
 {% block body %}
-    <h1>Create new ParentUser</h1>
+	<div class="container" style="margin-top:150px">
+		<div class="row d-flex flex-column">
+			<h1>Create new Parent</h1>
 
-    {{ include('parent_user/_form.html.twig') }}
+			{{ include('parent_user/_form.html.twig') }}
 
-    <a href="{{ path('parent_user_index') }}">back to list</a>
+
+		</div>
+		<div class="row mb-5 mt-5">
+			<a class="btn btn-danger" href="{{ path('parent_user_index') }}">back to list parent</a>
+			<a class="btn btn-success" href="{{ path('public_user_new') }}">Add new Person Info</a>
+		</div>
+	</div>
 {% endblock %}

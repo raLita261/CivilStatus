@@ -1,37 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-        <style>
- .register{
-     margin-top:100px;
-     width:60%;
-    
- }
+	<style>
+		.register {
+			margin-top: 100px;
+			width: 60%;
 
-        </style>
- {% endblock %}
+		}
+	</style>
+{% endblock %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-<div class="register mx-auto">
- <h4>Register</h4>
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	<div class="container" style="margin-top:150px">
+		<div class="register d-flex flex-column ">
+			<h4>Register</h4>
 
-    {{ form_start(registrationForm) }}
-        <label>Email </label>
-        {{ form_widget(registrationForm.email,{'attr':{class:'form-control', placeholder:'Enter your email'}}) }}
-        
-        <label>Password </label>
-        {{ form_widget(registrationForm.plainPassword,{'attr':{class:'form-control', placeholder:'Enter your password'}}) }}
+			{{ form_start(registrationForm) }}
+			<label>Email
+			</label>
+			{{ form_widget(registrationForm.email,{'attr':{class:'form-control', placeholder:'Enter your email'}}) }}
+
+			<label>Password
+			</label>
+			{{ form_widget(registrationForm.plainPassword,{'attr':{class:'form-control', placeholder:'Enter your password'}}) }}
 
 
-        {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-success">Register</button>
-    {{ form_end(registrationForm) }}
-</div>
-   
+			<button type="submit" class="btn btn-success">Register</button>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
 {% endblock %}
