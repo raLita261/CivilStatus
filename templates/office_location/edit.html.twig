@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OfficeLocation{% endblock %}
+
+{% block body %}
+    <h1>Edit OfficeLocation</h1>
+
+    {{ include('office_location/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('office_location_index') }}">back to list</a>
+
+    {{ include('office_location/_delete_form.html.twig') }}
+{% endblock %}

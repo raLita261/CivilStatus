@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mariage index{% endblock %}
+
+{% block body %}
+    <h1>Mariage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DeclarationDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mariage in mariages %}
+            <tr>
+                <td>{{ mariage.id }}</td>
+                <td>{{ mariage.declarationDate ? mariage.declarationDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('mariage_show', {'id': mariage.id}) }}">show</a>
+                    <a href="{{ path('mariage_edit', {'id': mariage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('mariage_new') }}">Create new</a>
+{% endblock %}

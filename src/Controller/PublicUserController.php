@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Birth;
 use App\Entity\PublicUser;
 use App\Form\PublicUserType;
 use App\Repository\PublicUserRepository;
@@ -30,8 +31,11 @@ class PublicUserController extends AbstractController
             ->where('u.DoD IS NULL')
             ->getQuery()
             ->getResult();
+
+        $fecthAllBirth = $entityManager->getRepository('App:Birth')->findAll();
         return $this->render('public_user/index.html.twig', [
             'public_users' => $selectedUserAlive,
+            'birthList' => $fecthAllBirth
         ]);
     }
 
@@ -133,6 +137,42 @@ class PublicUserController extends AbstractController
         $html = $this->renderView('public_user/pdf.html.twig', [
             'title' => "Welcome to our PDF Test",
             'publicUser' => $publicUser,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/pdfBirth", name="make_pdf_birth", methods={"GET"})
+     */
+    public function makeBirthPdf(Request $request, Birth $birth)
+    {
+        //entity manager
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('birth/pdf.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'birth' => $birth,
         ]);
 
         // Load HTML to Dompdf

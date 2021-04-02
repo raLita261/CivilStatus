@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Birth
+{% endblock %}
+
+{% block body %}
+	<div class="container" style="margin-top:150px">
+		<h1>Create new Birth</h1>
+
+		{{ include('birth/_form.html.twig') }}
+
+		<a href="{{ path('birth_index') }}">back to list</a>
+		<a class="btn btn-primary" href="{{ path('office_location_new') }}">Add new Office Location</a>
+	</div>
+
+{% endblock %}

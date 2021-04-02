@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Location</label>
+	{{ form_widget(form.location,{'attr':{'class':'form-control'}}) }}
+
+</div>
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,23 @@
+{{ form_start(form) }}
+
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Person</label>
+	{{ form_widget(form.publicUser,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Office Location</label>
+	{{ form_widget(form.officeLocation,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Delaction Date</label>
+	{{ form_widget(form.declarationDate,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

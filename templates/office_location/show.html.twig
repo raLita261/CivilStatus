@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OfficeLocation{% endblock %}
+
+{% block body %}
+    <h1>OfficeLocation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ office_location.id }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ office_location.location }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('office_location_index') }}">back to list</a>
+
+    <a href="{{ path('office_location_edit', {'id': office_location.id}) }}">edit</a>
+
+    {{ include('office_location/_delete_form.html.twig') }}
+{% endblock %}

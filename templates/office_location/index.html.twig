@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OfficeLocation index{% endblock %}
+
+{% block body %}
+    <h1>OfficeLocation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Location</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for office_location in office_locations %}
+            <tr>
+                <td>{{ office_location.id }}</td>
+                <td>{{ office_location.location }}</td>
+                <td>
+                    <a href="{{ path('office_location_show', {'id': office_location.id}) }}">show</a>
+                    <a href="{{ path('office_location_edit', {'id': office_location.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('office_location_new') }}">Create new</a>
+{% endblock %}

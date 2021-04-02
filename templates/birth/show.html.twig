@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Birth{% endblock %}
+
+{% block body %}
+    <h1>Birth</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ birth.id }}</td>
+            </tr>
+            <tr>
+                <th>DeclarationDate</th>
+                <td>{{ birth.declarationDate ? birth.declarationDate|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('birth_index') }}">back to list</a>
+
+    <a href="{{ path('birth_edit', {'id': birth.id}) }}">edit</a>
+
+    {{ include('birth/_delete_form.html.twig') }}
+{% endblock %}

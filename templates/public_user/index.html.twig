@@ -19,7 +19,7 @@
 	<script>
 		$(document).ready(function () {
 $('#example').DataTable();
-
+$('#example2').DataTable();
 
 });
 	</script>
@@ -30,106 +30,174 @@ $('#example').DataTable();
 
 {% block body %}
 	<div class="container" style="margin-top:150px">
-		<h3>
-			User List
-		</h3>
+		<div class="row d-flex flex-column">
+			<h3>
+				Birth List
+			</h3>
 
-		<table class="table" id="example">
-			<thead>
-				<tr>
-					<th>
-						Id
-					</th>
-					<th>
-						Fist Name
-					</th>
-					<th>
-						Last Name
-					</th>
-					<th>
-						Date of birth
-					</th>
-					<th>
-						FatherName
-					</th>
-					<th>
-						MotherName
-					</th>
-
-					<th>
-						actions
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for public_user in public_users %}
+			<table class="table" id="example2">
+				<thead>
 					<tr>
-						<td>
-							{{ public_user.id }}
-						</td>
-						<td>
-							{{ public_user.FName }}
-						</td>
-						<td>
-							{{ public_user.LName }}
-						</td>
-						<td>
-							{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}
-						</td>
-						<td>
-							{% if public_user.father == null %}
-								Unknown
-							{% else %}
-								{{ public_user.father.LastName }}
-								{{ public_user.father.FirstName }}
-							{% endif %}
-
-
-						</td>
-						<td>
-							{% if public_user.mother == null %}
-								Unknown
-							{% else %}
-
-								{{ public_user.mother.LastName }}
-								{{ public_user.mother.FirstName }}
-							{% endif %}
-
-						</td>
-
-						<td>
-							{% if app.user == null %}
-								<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
-									<span class="material-icons">PDF</span>
-								</a>
-							{% else %}
-								<a class="btn btn-info" href="{{ path( 'public_user_show', { id: public_user.id } ) }}">
-									show
-								</a>
-								<a class="btn btn-warning" href="{{ path( 'public_user_edit', { id: public_user.id } ) }}">
-									edit
-								</a>
-								<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
-									<span class="material-icons">PDF</span>
-								</a>
-							{% endif %}
-						</td>
+						<th>Id</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Declaration Date</th>
+						<th>actions</th>
 					</tr>
+				</thead>
+				<tbody>
+					{% for birth in birthList %}
+						<tr>
+							<td>{{ birth.id }}</td>
+							<td>{{ birth.publicUser.FName }}</td>
+							<td>{{ birth.publicUser.LName }}</td>
+							<td>{{ birth.declarationDate ? birth.declarationDate|date('Y-m-d') : '' }}</td>
+							<td>
+								{% if app.user == null %}
+									<a class="btn btn-primary" href=" {{ path('make_pdf_birth', { id: birth.id })}} ">
+										<span class="material-icons">PDF</span>
+									</a>
+								{% else %}
+									<a class="btn btn-info" href="{{ path('birth_show', {'id': birth.id}) }}">
+										show
+									</a>
+									<a class="btn btn-warning" href="{{ path('birth_edit', {'id': birth.id}) }}">
+										edit
+									</a>
+									<a class="btn btn-primary" href=" {{ path('make_pdf_birth', { id: birth.id })}} ">
+										<span class="material-icons">PDF</span>
+									</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+		</div>
+		<div class="row">
+
+
+			{% if app.user == null %}
+
 				{% else %}
+					<a class="btn btn-primary" href="{{ path('birth_new') }}">Create new Birth Certificate</a>
+			{% endif %}
+		</div>
+		{# user list #}
+		<div class="row d-flex flex-column">
+			<h3>
+				User List
+			</h3>
+
+			<table class="table" id="example">
+				<thead>
 					<tr>
-						<td colspan="9">
-							no records found
-						</td>
+						<th>
+							Id
+						</th>
+						<th>
+							Fist Name
+						</th>
+						<th>
+							Last Name
+						</th>
+						<th>
+							Date of birth
+						</th>
+						<th>
+							FatherName
+						</th>
+						<th>
+							MotherName
+						</th>
+
+						<th>
+							actions
+						</th>
 					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		{% if app.user == null %}
+				</thead>
+				<tbody>
+					{% for public_user in public_users %}
+						<tr>
+							<td>
+								{{ public_user.id }}
+							</td>
+							<td>
+								{{ public_user.FName }}
+							</td>
+							<td>
+								{{ public_user.LName }}
+							</td>
+							<td>
+								{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}
+							</td>
+							<td>
+								{% if public_user.father == null %}
+									Unknown
+								{% else %}
+									{{ public_user.father.LastName }}
+									{{ public_user.father.FirstName }}
+								{% endif %}
 
-			{% else %}
-				<a class="btn btn-primary" href="{{ path('public_user_new') }}">Create new</a>
-		{% endif %}
 
+							</td>
+							<td>
+								{% if public_user.mother == null %}
+									Unknown
+								{% else %}
+
+									{{ public_user.mother.LastName }}
+									{{ public_user.mother.FirstName }}
+								{% endif %}
+
+							</td>
+
+							<td>
+								{% if app.user == null %}
+									<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
+										<span class="material-icons">PDF</span>
+									</a>
+								{% else %}
+									<a class="btn btn-info" href="{{ path( 'public_user_show', { id: public_user.id } ) }}">
+										show
+									</a>
+									<a class="btn btn-warning" href="{{ path( 'public_user_edit', { id: public_user.id } ) }}">
+										edit
+									</a>
+									<a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
+										<span class="material-icons">PDF</span>
+									</a>
+								{% endif %}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="9">
+								no records found
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+		</div>
+
+		<div class="row">
+
+
+			{% if app.user == null %}
+
+				{% else %}
+					<a class="btn btn-primary" href="{{ path('public_user_new') }}">Create new</a>
+			{% endif %}
+		</div>
 
 	</div>
 {% endblock %}
