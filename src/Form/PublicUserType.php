@@ -23,7 +23,7 @@ class PublicUserType extends AbstractType
             ->add('placeOfBirth')
             ->add('DoB', DateTimeType::class, [
                 'widget' => 'single_text',
-                'input'  => 'datetime_immutable'
+
             ])
             ->add('father', EntityType::class, [
                 // looks for choices from this entity
@@ -58,7 +58,7 @@ class PublicUserType extends AbstractType
             ->add('DoD', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required' => false,
-                'input'  => 'datetime_immutable'
+
             ]);
     }
 
