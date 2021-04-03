@@ -57,6 +57,7 @@ class PublicUserType extends AbstractType
             ])
             ->add('DoD', DateTimeType::class, [
                 'widget' => 'single_text',
+                'required' => false,
                 'input'  => 'datetime_immutable'
             ]);
     }
