@@ -24,17 +24,17 @@ class Birth
 
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PublicUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
      */
     private $publicUser;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\OfficeLocation")
+     * @ORM\ManyToOne(targetEntity="App\Entity\OfficeLocation")
      */
     private $officeLocation;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $officier;
 

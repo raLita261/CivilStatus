@@ -56,14 +56,14 @@ class PublicUser
 
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ParentUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ParentUser")
      */
     private $father;
 
 
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ParentUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ParentUser")
      */
     private $mother;
 

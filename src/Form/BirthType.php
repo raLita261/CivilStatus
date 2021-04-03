@@ -20,7 +20,6 @@ class BirthType extends AbstractType
         $builder
             ->add('declarationDate', DateTimeType::class, [
                 'widget' => 'single_text',
-                'input'  => 'datetime_immutable'
             ])
             ->add('publicUser', EntityType::class, [
                 // looks for choices from this entity

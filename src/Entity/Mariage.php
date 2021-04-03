@@ -24,12 +24,12 @@ class Mariage
 
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PublicUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
      */
     private $husband;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PublicUser")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
      */
     private $wife;
 
