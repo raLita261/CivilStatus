@@ -19,10 +19,11 @@
 					{{publicUser.LName}}</p>
 
 				<p>
+					<!Le {{publicUser.DoB}} est ne(e) a >
 					Naissance de
 					{{publicUser.FName}}
 					{{publicUser.LName}}....
-					{#{% if publicUser.father == null %} N/A {%else%} {{publicUser.father.LastName}}{%endif%} #}
+					Fils de Monsieur {% if publicUser.father == null %} N/A {%else%} {{publicUser.father.LastName}}{%endif%} 
 				</p>
 			</body>
 		</html>
