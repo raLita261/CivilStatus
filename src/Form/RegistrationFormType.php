@@ -42,12 +42,6 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-            ->add('title', ChoiceType::class, [
-                'choices' => [
-                    "IT Admin" => true,
-                    "Simple Admin" => false
-                ],
             ]);
     }
 

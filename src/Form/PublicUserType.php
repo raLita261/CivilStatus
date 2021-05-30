@@ -25,30 +25,8 @@ class PublicUserType extends AbstractType
                 'widget' => 'single_text',
 
             ])
-            ->add('father', EntityType::class, [
-                // looks for choices from this entity
-                'class' => ParentUser::class,
-                // uses the User.username property as the visible option string
-                'placeholder' => 'Choose Father ID',
-                'required' => false,
-                'choice_label' => 'id',
 
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
-            ->add('mother', EntityType::class, [
-                // looks for choices from this entity
-                'class' => ParentUser::class,
-                // uses the User.username property as the visible option string
-                'placeholder' => 'Choose Mother ID',
-                'required' => false,
-                'choice_label' => 'id',
 
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
             ->add('isAlive', ChoiceType::class, [
                 'choices' => [
                     "Alive" => true,
@@ -59,7 +37,11 @@ class PublicUserType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
 
-            ]);
+            ])
+            ->add('fatherName')
+            ->add('fatherOccupation')
+            ->add('motherName')
+            ->add('motherOccupation');
     }
 
     public function configureOptions(OptionsResolver $resolver)

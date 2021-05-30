@@ -25,6 +25,11 @@ class PublicUserController extends AbstractController
     public function index(PublicUserRepository $publicUserRepository): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if ($user  == null) {
+
+            return $this->redirectToRoute('app_login');
+        }
         $qb = $entityManager->createQueryBuilder();
         $selectedUserAlive = $qb->select('u')
             ->from('App:PublicUser', 'u')
@@ -32,10 +37,15 @@ class PublicUserController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        //check user details
+        $userDetails = $entityManager->getRepository('App:PublicUser')->findOneBy(['user' => $user]);
+
         $fecthAllBirth = $entityManager->getRepository('App:Birth')->findAll();
         return $this->render('public_user/index.html.twig', [
             'public_users' => $selectedUserAlive,
-            'birthList' => $fecthAllBirth
+            'birthList' => $fecthAllBirth,
+            'userDetails' => $userDetails,
+            'user' => $user,
         ]);
     }
 
@@ -45,17 +55,23 @@ class PublicUserController extends AbstractController
     public function new(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if ($user  == null) {
+
+            return $this->redirectToRoute('app_login');
+        }
+
         $publicUser = new PublicUser();
         $form = $this->createForm(PublicUserType::class, $publicUser);
         $form->handleRequest($request);
 
-        //select all from parentUser
-        $listeAllParent = $entityManager->getRepository('App:ParentUser')->findAll();
+        //check user details
+        $userDetails = $entityManager->getRepository('App:PublicUser')->findOneBy(['user' => $user]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $entityManager = $this->getDoctrine()->getManager();
             //generate rand num
-            $publicUser->setVerificationCode(rand());
+            $publicUser->setUser($user);
             $entityManager->persist($publicUser);
             $entityManager->flush();
 
@@ -65,7 +81,8 @@ class PublicUserController extends AbstractController
         return $this->render('public_user/new.html.twig', [
             'public_user' => $publicUser,
             'form' => $form->createView(),
-            'allParentUser' => $listeAllParent
+            'userDetails' => $userDetails
+
         ]);
     }
 

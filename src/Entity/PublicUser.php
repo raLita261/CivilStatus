@@ -48,24 +48,35 @@ class PublicUser
     private $DoD;
 
 
-    /**
-     * @ORM\Column(type="integer")
+     /**
+     * @ORM\Column(type="string", length=255)
      */
-    private $VerificationCode;
-
-
+    private $fatherName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParentUser")
+     * @ORM\Column(type="string", length=255)
      */
-    private $father;
-
+    private $fatherOccupation;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParentUser")
+     * @ORM\Column(type="string", length=255)
      */
-    private $mother;
+    private $motherName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $motherOccupation;
+
+      
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
+
+
 
     public function getId(): ?int
     {
@@ -144,39 +155,65 @@ class PublicUser
         return $this;
     }
 
-    public function getVerificationCode(): ?int
+    public function getFatherName(): ?string
     {
-        return $this->VerificationCode;
+        return $this->fatherName;
     }
 
-    public function setVerificationCode(int $VerificationCode): self
+    public function setFatherName(string $fatherName): self
     {
-        $this->VerificationCode = $VerificationCode;
+        $this->fatherName = $fatherName;
 
         return $this;
     }
 
-    public function getFather(): ?ParentUser
+    public function getFatherOccupation(): ?string
     {
-        return $this->father;
+        return $this->fatherOccupation;
     }
 
-    public function setFather(?ParentUser $father): self
+    public function setFatherOccupation(string $fatherOccupation): self
     {
-        $this->father = $father;
+        $this->fatherOccupation = $fatherOccupation;
 
         return $this;
     }
 
-    public function getMother(): ?ParentUser
+    public function getMotherName(): ?string
     {
-        return $this->mother;
+        return $this->motherName;
     }
 
-    public function setMother(?ParentUser $mother): self
+    public function setMotherName(string $motherName): self
     {
-        $this->mother = $mother;
+        $this->motherName = $motherName;
 
         return $this;
     }
+
+    public function getMotherOccupation(): ?string
+    {
+        return $this->motherOccupation;
+    }
+
+    public function setMotherOccupation(string $motherOccupation): self
+    {
+        $this->motherOccupation = $motherOccupation;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+   
 }

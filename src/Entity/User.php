@@ -36,10 +36,10 @@ class User implements UserInterface
      */
     private $password;
 
-       /**
-     * @ORM\Column(type="boolean")
+    /**
+     * @ORM\Column(type="boolean" , options={"default":"0"})
      */
-    private $title;
+    private $title = false;
 
     public function getId(): ?int
     {
