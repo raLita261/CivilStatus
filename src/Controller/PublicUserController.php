@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Form\BirthType;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -22,7 +22,7 @@ class PublicUserController extends AbstractController
     /**
      * @Route("/", name="public_user_index", methods={"GET"})
      */
-    public function index(PublicUserRepository $publicUserRepository): Response
+    public function index(PublicUserRepository $publicUserRepository, Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -40,12 +40,20 @@ class PublicUserController extends AbstractController
         //check user details
         $userDetails = $entityManager->getRepository('App:PublicUser')->findOneBy(['user' => $user]);
 
+
+        //get all birth  list
         $fecthAllBirth = $entityManager->getRepository('App:Birth')->findAll();
+
+        //fetch all birth user certificate 
+        $fecthPublicUserBirthCertificate = $entityManager->getRepository('App:Birth')->findBy(['publicUser' => $userDetails]);
+
         return $this->render('public_user/index.html.twig', [
             'public_users' => $selectedUserAlive,
             'birthList' => $fecthAllBirth,
             'userDetails' => $userDetails,
+            'userBirthCertificate' => $fecthPublicUserBirthCertificate,
             'user' => $user,
+
         ]);
     }
 
@@ -187,7 +195,7 @@ class PublicUserController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('birth/pdf.html.twig', [
+        $html = $this->renderView('birth/pdfBirth.html.twig', [
             'title' => "Welcome to our PDF Test",
             'birth' => $birth,
         ]);

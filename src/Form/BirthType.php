@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 
@@ -21,29 +22,14 @@ class BirthType extends AbstractType
             ->add('declarationDate', DateTimeType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('publicUser', EntityType::class, [
-                // looks for choices from this entity
-                'class' => PublicUser::class,
-                // uses the User.username property as the visible option string
-                'placeholder' => 'Choose Person',
-                'required' => true,
-                'choice_label' => 'FName',
-
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
-            ->add('officeLocation', EntityType::class, [
-                // looks for choices from this entity
-                'class' => OfficeLocation::class,
-                // uses the User.username property as the visible option string
-                'placeholder' => 'Choose Office Location',
-                'required' => true,
-                'choice_label' => 'location',
-
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
+            ->add('officeLocation')
+            ->add('officier')
+            ->add('payment')
+            ->add('status', ChoiceType::class, [
+                'choices'  => [
+                    'Pending' => 'Pending',
+                    'Approved' => 'Approved',
+                ],
             ]);
     }
 

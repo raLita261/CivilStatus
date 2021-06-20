@@ -51,6 +51,34 @@ class BirthController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/users", name="birth_users", methods={"GET","POST"})
+     */
+    public function users(Request $request): Response
+    {
+        $user = $this->getUser();
+        $birth = new Birth();
+        $form = $this->createForm(BirthType::class, $birth);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            //get public user details
+            $userDetails = $entityManager->getRepository('App:PublicUser')->findOneBy(['user' => $user]);
+            $birth->setPublicUser($userDetails);
+            $entityManager->persist($birth);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('public_user_index');
+        }
+
+        return $this->render('birth/newbirth.html.twig', [
+            'birth' => $birth,
+            'form' => $form->createView(),
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="birth_show", methods={"GET"})
      */
     public function show(Birth $birth): Response
@@ -71,7 +99,7 @@ class BirthController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('birth_index');
+            return $this->redirectToRoute('public_user_index');
         }
 
         return $this->render('birth/edit.html.twig', [

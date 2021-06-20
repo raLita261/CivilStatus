@@ -2,8 +2,8 @@
 
 
 <div class="form-group">
-	<label for="exampleInputEmail1">Person</label>
-	{{ form_widget(form.publicUser,{'attr':{'class':'form-control'}}) }}
+	<label for="exampleInputEmail1">Officier Name</label>
+	{{ form_widget(form.officier,{'attr':{'class':'form-control'}}) }}
 
 </div>
 
@@ -18,6 +18,18 @@
 	{{ form_widget(form.declarationDate,{'attr':{'class':'form-control'}}) }}
 
 </div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Payment reference</label>
+	{{ form_widget(form.payment,{'attr':{'class':'form-control'}}) }}
+
+</div>
+<div class="form-group">
+	<label for="exampleInputEmail1">Status</label>
+	{{ form_widget(form.status,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
 
 <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

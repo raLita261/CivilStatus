@@ -9,8 +9,8 @@
 
 		{{ include('birth/_form.html.twig') }}
 
-		<a href="{{ path('birth_index') }}">back to list</a>
-		<a class="btn btn-primary" href="{{ path('office_location_new') }}">Add new Office Location</a>
+		<a class="d-none" href="{{ path('birth_index') }}">back to list</a>
+		<a class="btn btn-primary d-none" href="{{ path('office_location_new') }}">Add new Office Location</a>
 	</div>
 
 {% endblock %}

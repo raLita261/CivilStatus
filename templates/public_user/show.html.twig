@@ -1,50 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PublicUser{% endblock %}
+{% block title %}PublicUser
+{% endblock %}
 
 {% block body %}
-    <h1>PublicUser</h1>
+	<h1>PublicUser</h1>
+	<div class="table-responsive">
+		<table class="table mt-5">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>FName</th>
+					<th>LName</th>
+					<th>DoB</th>
+					<th>FatherName</th>
+					<th>Father Occupation</th>
+					<th>Mother Occupation</th>
+					<th>MotherName</th>
+					<th>DoD</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ public_user.id }}</td>
-            </tr>
-            <tr>
-                <th>FName</th>
-                <td>{{ public_user.FName }}</td>
-            </tr>
-            <tr>
-                <th>LName</th>
-                <td>{{ public_user.LName }}</td>
-            </tr>
-            <tr>
-                <th>DoB</th>
-                <td>{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>FatherName</th>
-                <td>{{ public_user.FatherName }}</td>
-            </tr>
-            <tr>
-                <th>MotherName</th>
-                <td>{{ public_user.MotherName }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ public_user.Status ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>DoD</th>
-                <td>{{ public_user.DoD ? public_user.DoD|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+					<td>{{ public_user.id }}</td>
+					<td>{{ public_user.FName }}</td>
+					<td>{{ public_user.LName }}</td>
+					<td>{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}</td>
+					<td>{{ public_user.FatherName }}</td>
+					<td>{{ public_user.FatherOccupation }}</td>
+					<td>{{ public_user.MotherName }}</td>
+					<td>{{ public_user.MotherOccupation }}</td>
+					<td>{{ public_user.DoD ? public_user.DoD|date('Y-m-d') : '' }}</td>
+				</tr>
 
-    <a href="{{ path('public_user_index') }}">back to list</a>
+			</tbody>
+		</table>
+	</div>
+	<a href="{{ path('public_user_index') }}">back to list</a>
 
-    <a href="{{ path('public_user_edit', {'id': public_user.id}) }}">edit</a>
+	<a href="{{ path('public_user_edit', {'id': public_user.id}) }}">edit</a>
 
-    {{ include('public_user/_delete_form.html.twig') }}
+	{{ include('public_user/_delete_form.html.twig') }}
 {% endblock %}

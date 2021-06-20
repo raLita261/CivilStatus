@@ -18,7 +18,7 @@ class Birth
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date" , nullable = true)
      */
     private $declarationDate;
 
@@ -27,16 +27,25 @@ class Birth
      * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
      */
     private $publicUser;
-
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\OfficeLocation")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $officeLocation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $officier;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $payment;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
 
     public function getId(): ?int
     {
@@ -48,9 +57,45 @@ class Birth
         return $this->declarationDate;
     }
 
-    public function setDeclarationDate(\DateTimeInterface $declarationDate): self
+    public function setDeclarationDate(?\DateTimeInterface $declarationDate): self
     {
         $this->declarationDate = $declarationDate;
+
+        return $this;
+    }
+
+    public function getOfficeLocation(): ?string
+    {
+        return $this->officeLocation;
+    }
+
+    public function setOfficeLocation(?string $officeLocation): self
+    {
+        $this->officeLocation = $officeLocation;
+
+        return $this;
+    }
+
+    public function getOfficier(): ?string
+    {
+        return $this->officier;
+    }
+
+    public function setOfficier(?string $officier): self
+    {
+        $this->officier = $officier;
+
+        return $this;
+    }
+
+    public function getPayment(): ?string
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?string $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }
@@ -67,26 +112,14 @@ class Birth
         return $this;
     }
 
-    public function getOfficeLocation(): ?OfficeLocation
+    public function getStatus(): ?string
     {
-        return $this->officeLocation;
+        return $this->status;
     }
 
-    public function setOfficeLocation(?OfficeLocation $officeLocation): self
+    public function setStatus(?string $status): self
     {
-        $this->officeLocation = $officeLocation;
-
-        return $this;
-    }
-
-    public function getOfficier(): ?User
-    {
-        return $this->officier;
-    }
-
-    public function setOfficier(?User $officier): self
-    {
-        $this->officier = $officier;
+        $this->status = $status;
 
         return $this;
     }
