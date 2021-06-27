@@ -1,4 +1,54 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Payment reference</label>
+	{{ form_widget(form.payment,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Husband ID</label>
+	{{ form_widget(form.husband,{'attr':{'class':'form-control '}}) }}
+
+</div>
+
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Wife ID</label>
+	{{ form_widget(form.wife,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Temoin ID</label>
+	{{ form_widget(form.temoin,{'attr':{'class':'form-control'}}) }}
+
+</div>
+<div class="form-group">
+	<label for="exampleInputEmail1">Status</label>
+	{{ form_widget(form.status,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Decalaration Date</label>
+	{{ form_widget(form.declarationDate,{'attr':{'class':'datepicker'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Office Location</label>
+	{{ form_widget(form.officeLocation,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Officer</label>
+	{{ form_widget(form.officier,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

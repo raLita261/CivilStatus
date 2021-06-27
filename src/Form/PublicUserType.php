@@ -41,7 +41,13 @@ class PublicUserType extends AbstractType
             ->add('fatherName')
             ->add('fatherOccupation')
             ->add('motherName')
-            ->add('motherOccupation');
+            ->add('motherOccupation')
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    "Male" => true,
+                    "Female" => false
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

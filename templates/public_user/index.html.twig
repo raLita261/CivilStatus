@@ -41,7 +41,7 @@ $('#example2').DataTable();
 					Birth list
 				</h3>
 				<div class="table-responsive">
-					<table class="table">
+					<table class="table table-success">
 						<thead>
 							<tr>
 								<th>Cerificate id</th>
@@ -58,7 +58,81 @@ $('#example2').DataTable();
 									<td>{{birth.status}}</td>
 									<th>{{birth.declarationDate|date('Y-m-d')}}</th>
 									<td>
-										<a href="{{ path('birth_edit', {'id': birth.id}) }}">edit</a>
+										<a class="btn btn-info" href="{{ path('birth_edit', {'id': birth.id}) }}">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+										</a>
+									</td>
+								</tr>
+
+
+							{% endfor %}
+						</tbody>
+
+					</table>
+				</div>
+
+				<h3>
+					Mariage Certificate list
+				</h3>
+
+
+				<div class="table-responsive mt-2">
+					<table class=" table table-primary">
+						<thead>
+							<tr>
+								<th>Cerificate id</th>
+								<th>Status</th>
+								<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in mariageList %}
+
+								<tr>
+									<td>{{item.id}}</td>
+									<td>{{item.status}}</td>
+									<th>{{item.declarationDate|date('Y-m-d')}}</th>
+									<td>
+										<a class="btn btn-info" href="{{ path('mariage_edit', {'id': item.id}) }}">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+										</a>
+									</td>
+								</tr>
+
+
+							{% endfor %}
+						</tbody>
+
+					</table>
+				</div>
+
+				<h3>
+					Death Certificate list
+				</h3>
+
+
+				<div class="table-responsive mt-2">
+					<table class=" table table-danger">
+						<thead>
+							<tr>
+								<th>Cerificate id</th>
+								<th>Status</th>
+								<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in deathList %}
+
+								<tr>
+									<td>{{item.id}}</td>
+									<td>{{item.status}}</td>
+									<th>{{item.declarationDate|date('Y-m-d')}}</th>
+									<td>
+										<a class="btn btn-info" href="{{ path('death_edit', {'id': item.id}) }}">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+										</a>
 									</td>
 								</tr>
 
@@ -89,7 +163,7 @@ $('#example2').DataTable();
 
 					{% else %}
 						<div class="table-responsive">
-							<table class="table">
+							<table class="table table-info">
 								<thead>
 									<tr>
 										<th>
@@ -118,57 +192,53 @@ $('#example2').DataTable();
 											Mother Occupation
 										</th>
 
-										<th>
-											actions
-										</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									{% for public_user in public_users %}
-										<tr>
-											<td>
-												{{ public_user.id }}
-											</td>
-											<td>
-												{{ public_user.FName }}
-											</td>
-											<td>
-												{{ public_user.LName }}
-											</td>
-											<td>
-												{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}
-											</td>
-											<td>
-												{{ public_user.FatherName }}
+										{% if public_user.user.id == userDetails.id %}
 
-											</td>
-											<td>
-												{{ public_user.FatherOccupation }}
 
-											</td>
-											<td>
-												{{ public_user.MotherName }}
+											<tr>
+												<td>
+													{{ public_user.id }}
+												</td>
+												<td>
+													{{ public_user.FName }}
+												</td>
+												<td>
+													{{ public_user.LName }}
+												</td>
+												<td>
+													{{ public_user.DoB ? public_user.DoB|date('Y-m-d') : '' }}
+												</td>
+												<td>
+													{{ public_user.FatherName }}
 
-											</td>
-											<td>
-												{{ public_user.MotherOccupation }}
+												</td>
+												<td>
+													{{ public_user.FatherOccupation }}
 
-											</td>
+												</td>
+												<td>
+													{{ public_user.MotherName }}
 
-											<td>
+												</td>
+												<td>
+													{{ public_user.MotherOccupation }}
 
-												<a class="btn btn-info" href="{{ path( 'public_user_show', { id: public_user.id } ) }}">
-													show
-												</a>
-												{# <a class="btn btn-warning" href="{{ path( 'public_user_edit', { id: public_user.id } ) }}">
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									edit
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								</a> #}
-												{# <a class="btn btn-primary" href=" {{ path('make_pdf', { id: public_user.id })}} ">
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									<span class="material-icons">PDF</span>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								</a> #}
+												</td>
 
-											</td>
-										</tr>
+												<td>
+
+													<a class="btn btn-info" href="{{ path( 'public_user_edit', { id: public_user.id } ) }}">
+														Edit
+													</a>
+
+												</td>
+											</tr>
+										{% endif %}
 									{% else %}
 										<tr>
 											<td colspan="9">
@@ -199,59 +269,147 @@ $('#example2').DataTable();
 						<div class="tab-content" id="myTabContent">
 							<div class="tab-pane fade show active" id="Birth" role="tabpanel" aria-labelledby="birth-tab">
 								<div class="row">
-
-									<table class="table">
-										<thead>
-											<tr>
-												<th>Certificate id</th>
-												<th>Status</th>
-												<th>Date</th>
-												<th>Download</th>
-											</tr>
-										</thead>
-										<tbody>
-											{% for item in userBirthCertificate %}
-												<tr>
-
-													<td>{{item.id}}</td>
-													<td>{{item.status}}</td>
-													<th>{{item.declarationDate|date('Y-m-d')}}</th>
-													{% if item.status =="Approved" %}
-														<td>
-															<a class="btn btn-primary" href=" {{ path('make_pdf_birth', { id: item.id })}} ">
-																<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-															</td>
-														</td>
-													{% else %}
-														<td>
-															<span>Payment verification
-															</span>
-														</td>
-													{% endif %}
-
-
-												</tr>
-											{% endfor %}
-
-
-										</tbody>
-									</table>
-
-									<a class="btn btn-success" href="{{ path( 'birth_users', { id: userDetails.id } ) }}">
+									<a class="btn btn-success mt-2" href="{{ path( 'birth_users', { id: userDetails.id } ) }}">
 										Generate Birth Certificate</a>
+									<div class="table-responsive mt-3">
+										<table class="table table-info">
+											<thead>
+												<tr>
+													<th>Certificate id</th>
+													<th>Status</th>
+													<th>Date</th>
+													<th>Download</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in userBirthCertificate %}
+													<tr>
+
+														<td>{{item.id}}</td>
+														<td>{{item.status}}</td>
+														<th>{{item.declarationDate|date('Y-m-d')}}</th>
+														{% if item.status =="Approved" %}
+															<td>
+																<a class="btn btn-danger" href=" {{ path('make_pdf_birth', { id: item.id })}} ">
+																	<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+																</td>
+															</td>
+														{% else %}
+															<td>
+																<span>Payment verification
+																</span>
+															</td>
+														{% endif %}
+
+
+													</tr>
+												{% endfor %}
+
+
+											</tbody>
+										</table>
+									</div>
+
 								</div>
 
 							</div>
 							<div class="tab-pane fade" id="Mariage" role="tabpanel" aria-labelledby="mariage-tab">
 								<div class="row">
-									<button class="btn btn-success">
-										Generate Mariage Certificate</button>
+									<a class="btn btn-success mt-2" href="{{ path('mariage_new') }}">Generate Mariage Certificate</a>
+									<div class="table-responsive mt-3">
+										<table class="table table-success">
+											<thead>
+												<tr>
+													<th>Certificate id</th>
+													<th>Status</th>
+													<th>Date</th>
+													<th>Download</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in mariageList %}
+													{% if item.husband.id == userDetails.id or item.wife.id == userDetails.id %}
+														<tr>
+
+															<td>{{item.id}}</td>
+															<td>{{item.status}}</td>
+															<th>{{item.declarationDate|date('Y-m-d')}}</th>
+															{% if item.status =="Approved" %}
+																<td>
+																	<a class="btn btn-danger" href=" {{ path('make_pdf_mariage', { id: item.id })}} ">
+																		<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+																	</td>
+																</td>
+															{% else %}
+																<td>
+																	<span>Payment verification
+																	</span>
+																</td>
+															{% endif %}
+
+
+														</tr>
+
+													{% endif %}
+
+
+												{% endfor %}
+
+
+											</tbody>
+										</table>
+									</div>
+
+
 								</div>
 							</div>
 							<div class="tab-pane fade" id="Death" role="tabpanel" aria-labelledby="death-tab">
 								<div class="row">
-									<button class="btn btn-success">
-										Generate Death Certificate</button>
+									<a class="btn btn-success mt-2" href="{{ path('death_new') }}">Register Death
+									</a>
+									<div class="table-responsive mt-3">
+										<table class="table table-danger">
+											<thead>
+												<tr>
+													<th>Certificate id</th>
+													<th>Status</th>
+													<th>Date</th>
+													<th>Download</th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for item in deathList %}
+													{% if item.temoin.id == userDetails.id %}
+														<tr>
+
+															<td>{{item.id}}</td>
+															<td>{{item.status}}</td>
+															<th>{{item.declarationDate|date('Y-m-d')}}</th>
+															{% if item.status =="Approved" %}
+																<td>
+																	<a class="btn btn-danger" href=" {{ path('make_pdf_mariage', { id: item.id })}} ">
+																		<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+																	</td>
+																</td>
+															{% else %}
+																<td>
+																	<span>Payment verification
+																	</span>
+																</td>
+															{% endif %}
+
+
+														</tr>
+
+													{% endif %}
+
+
+												{% endfor %}
+
+
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

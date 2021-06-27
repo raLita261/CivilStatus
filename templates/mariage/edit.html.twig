@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Mariage{% endblock %}
+{% block title %}Edit Mariage
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Mariage</h1>
+	<div class="container" style="margin-top:150px">
 
-    {{ include('mariage/_form.html.twig', {'button_label': 'Update'}) }}
+		<h1>Edit Mariage</h1>
 
-    <a href="{{ path('mariage_index') }}">back to list</a>
+		{{ include('mariage/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('mariage/_delete_form.html.twig') }}
+		<a href="{{ path('mariage_index') }}">back to list</a>
+
+		{{ include('mariage/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

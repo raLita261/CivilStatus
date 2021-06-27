@@ -48,7 +48,7 @@ class PublicUser
     private $DoD;
 
 
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $fatherName;
@@ -69,13 +69,16 @@ class PublicUser
      */
     private $motherOccupation;
 
-      
+
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User")
      */
     private $user;
-
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $gender;
 
 
     public function getId(): ?int
@@ -215,5 +218,15 @@ class PublicUser
         return $this;
     }
 
-   
+    public function getGender(): ?bool
+    {
+        return $this->gender;
+    }
+
+    public function setGender(bool $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
 }

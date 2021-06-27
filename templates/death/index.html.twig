@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Death index{% endblock %}
+
+{% block body %}
+    <h1>Death index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DeathDate</th>
+                <th>DeclarationDate</th>
+                <th>Payment</th>
+                <th>OfficeLocation</th>
+                <th>Officier</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for death in deaths %}
+            <tr>
+                <td>{{ death.id }}</td>
+                <td>{{ death.deathDate ? death.deathDate|date('Y-m-d') : '' }}</td>
+                <td>{{ death.declarationDate ? death.declarationDate|date('Y-m-d') : '' }}</td>
+                <td>{{ death.payment }}</td>
+                <td>{{ death.officeLocation }}</td>
+                <td>{{ death.officier }}</td>
+                <td>
+                    <a href="{{ path('death_show', {'id': death.id}) }}">show</a>
+                    <a href="{{ path('death_edit', {'id': death.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('death_new') }}">Create new</a>
+{% endblock %}

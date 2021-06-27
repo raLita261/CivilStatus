@@ -5,12 +5,13 @@
 
 {% block body %}
 	<div class="container" style="margin-top:150px">
-		<h1>Edit Person</h1>
+		<h1>Edit My Info
+		</h1>
 
 		{{ include('public_user/_form.html.twig', {'button_label': 'Update'}) }}
 
-		<a href="{{ path('public_user_index') }}">back to list</a>
+	{# <a class="btn btn-primary" href="{{ path('public_user_index') }}">back to list</a> #}
 
-		{{ include('public_user/_delete_form.html.twig') }}
+		{# {{ include('public_user/_delete_form.html.twig') }} #}
 	</div>
 {% endblock %}

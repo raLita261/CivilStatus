@@ -69,7 +69,7 @@ class MariageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('mariage_index');
+            return $this->redirectToRoute('public_user_index');
         }
 
         return $this->render('mariage/edit.html.twig', [

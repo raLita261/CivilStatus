@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Death
+{% endblock %}
+
+{% block body %}
+	<div class="container" style="margin-top:150px">
+
+		<h1>Edit Death record</h1>
+
+		{{ include('death/_form.html.twig', {'button_label': 'Update'}) }}
+
+		<a href="{{ path('death_index') }}">back to list</a>
+		{# 
+		    {{ include('death/_delete_form.html.twig') }} #}
+	</div>
+{% endblock %}

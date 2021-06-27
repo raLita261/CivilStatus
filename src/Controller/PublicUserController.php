@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Birth;
+use App\Entity\Death;
+use App\Entity\Mariage;
 use App\Entity\PublicUser;
 use App\Form\PublicUserType;
 use App\Repository\PublicUserRepository;
@@ -30,12 +32,14 @@ class PublicUserController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }
-        $qb = $entityManager->createQueryBuilder();
-        $selectedUserAlive = $qb->select('u')
-            ->from('App:PublicUser', 'u')
-            ->where('u.DoD IS NULL')
-            ->getQuery()
-            ->getResult();
+        // $qb = $entityManager->createQueryBuilder();
+        // $selectedUserAlive = $qb->select('u')
+        //     ->from('App:PublicUser', 'u')
+        //     ->where('u.DoD IS NULL')
+        //     ->getQuery()
+        //     ->getResult();
+
+        $AllPublicUser = $entityManager->getRepository('App:PublicUser')->findAll();
 
         //check user details
         $userDetails = $entityManager->getRepository('App:PublicUser')->findOneBy(['user' => $user]);
@@ -47,11 +51,24 @@ class PublicUserController extends AbstractController
         //fetch all birth user certificate 
         $fecthPublicUserBirthCertificate = $entityManager->getRepository('App:Birth')->findBy(['publicUser' => $userDetails]);
 
+
+        //get all birth  list
+        $fecthAllMariage = $entityManager->getRepository('App:Mariage')->findAll();
+
+        //get all birth  list
+        $fecthAllDeath = $entityManager->getRepository('App:Death')->findAll();
+
+        //fetch all mariage user certificate 
+        // $fecthPublicUserlMariageCertificate = $entityManager->getRepository('App:Mariage')->findBy(['publicUser' => $userDetails]);
+
         return $this->render('public_user/index.html.twig', [
-            'public_users' => $selectedUserAlive,
+            'public_users' => $AllPublicUser,
             'birthList' => $fecthAllBirth,
             'userDetails' => $userDetails,
             'userBirthCertificate' => $fecthPublicUserBirthCertificate,
+            'mariageList' => $fecthAllMariage,
+            'deathList' => $fecthAllDeath,
+            //'userMariageCertificate' => $fecthPublicUserlMariageCertificate,
             'user' => $user,
 
         ]);
@@ -198,6 +215,78 @@ class PublicUserController extends AbstractController
         $html = $this->renderView('birth/pdfBirth.html.twig', [
             'title' => "Welcome to our PDF Test",
             'birth' => $birth,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/pdfMariage", name="make_pdf_mariage", methods={"GET"})
+     */
+    public function makeMariagehPdf(Request $request, Mariage $mariage)
+    {
+        //entity manager
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('mariage/pdfMariage.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'mariage' => $mariage,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/pdfDeath", name="make_pdf_death", methods={"GET"})
+     */
+    public function makeDeathhPdf(Request $request, Death $death)
+    {
+        //entity manager
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('death/pdfDeath.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'death' => $death,
         ]);
 
         // Load HTML to Dompdf

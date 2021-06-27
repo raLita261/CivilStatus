@@ -15,6 +15,12 @@
 </div>
 
 <div class="form-group">
+	<label for="exampleInputEmail1">Gender</label>
+	{{ form_widget(form.gender,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
 	<label for="exampleInputEmail1">Date of Birth</label>
 	{{ form_widget(form.DoB,{'attr':{'class':'form-control'}}) }}
 
@@ -35,13 +41,26 @@
 
 <div class="form-group">
 	<label for="exampleInputEmail1">Father Name</label>
-	{{ form_widget(form.father,{'attr':{'class':'form-control'}}) }}
+	{{ form_widget(form.fatherName,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Father Occupation</label>
+	{{ form_widget(form.fatherOccupation,{'attr':{'class':'form-control'}}) }}
 
 </div>
 
 <div class="form-group">
 	<label for="exampleInputEmail1">Mother Name</label>
-	{{ form_widget(form.mother,{'attr':{'class':'form-control'}}) }}
+	{{ form_widget(form.motherName,{'attr':{'class':'form-control'}}) }}
+
+</div>
+
+<div class="form-group">
+	<label for="exampleInputEmail1">Mother Occupation</label>
+	{{ form_widget(form.motherOccupation,{'attr':{'class':'form-control'}}) }}
 
 </div>
 
@@ -52,5 +71,5 @@
 </div>
 
 
-<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+<button class="btn btn-success mb-4">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

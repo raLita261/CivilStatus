@@ -42,7 +42,7 @@ $('.datepicker').datepicker()
 {% block body %}
 	<div class="container" style="margin-top:150px">
 		<div class="row justify-content-center">
-			<h3>Create new PublicUser</h3>
+			<h3>Create Account</h3>
 		</div>
 		<div class="row justify-content-center">
 			<div class="col-md-6">
@@ -68,18 +68,18 @@ $('.datepicker').datepicker()
 				</div>
 
 				<div class="form-group">
+					<label for="exampleInputEmail1">Gender</label>
+					{{ form_widget(form.gender,{'attr':{'class':'form-control'}}) }}
+
+				</div>
+
+
+				<div class="form-group">
 					<label for="exampleInputEmail1">Place of Birth</label>
 					{{ form_widget(form.placeOfBirth,{'attr':{'class':'form-control'}}) }}
 
 				</div>
 
-
-				<label>Is Alive</label>
-				{{ form_widget(form.isAlive) }}
-				<div class="dead">
-					<label>Death Details</label>
-					{{ form_widget(form.DoD) }}
-				</div>
 
 			</div>
 			<div class="col-md-6">
@@ -106,6 +106,13 @@ $('.datepicker').datepicker()
 					<label for="exampleInputEmail1">Mother Occupation</label>
 					{{ form_widget(form.motherOccupation,{'attr':{'class':'form-control'}}) }}
 
+				</div>
+
+				<label>Is Alive</label>
+				{{ form_widget(form.isAlive) }}
+				<div class="dead">
+					<label>Death Details</label>
+					{{ form_widget(form.DoD) }}
 				</div>
 
 

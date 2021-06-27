@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\MariageRepository;
+use App\Repository\DeathRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=MariageRepository::class)
+ * @ORM\Entity(repositoryClass=DeathRepository::class)
  */
-class Mariage
+class Death
 {
     /**
      * @ORM\Id
@@ -17,10 +17,10 @@ class Mariage
      */
     private $id;
 
-     /**
+    /**
      * @ORM\Column(type="date")
      */
-    private $mariageDate;
+    private $deathDate;
 
 
     /**
@@ -28,23 +28,30 @@ class Mariage
      */
     private $declarationDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
+     */
+    private $maty;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
      */
-    private $husband;
+    private $vadiny;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
-     */
-    private $wife;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PublicUser")
      */
     private $temoin;
 
-     /**
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $payment;
+
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $officeLocation;
@@ -54,19 +61,28 @@ class Mariage
      */
     private $officier;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $payment;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $status;
 
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getDeathDate(): ?\DateTimeInterface
+    {
+        return $this->deathDate;
+    }
+
+    public function setDeathDate(\DateTimeInterface $deathDate): self
+    {
+        $this->deathDate = $deathDate;
+
+        return $this;
     }
 
     public function getDeclarationDate(): ?\DateTimeInterface
@@ -81,26 +97,14 @@ class Mariage
         return $this;
     }
 
-    public function getHusband(): ?PublicUser
+    public function getPayment(): ?string
     {
-        return $this->husband;
+        return $this->payment;
     }
 
-    public function setHusband(?PublicUser $husband): self
+    public function setPayment(?string $payment): self
     {
-        $this->husband = $husband;
-
-        return $this;
-    }
-
-    public function getWife(): ?PublicUser
-    {
-        return $this->wife;
-    }
-
-    public function setWife(?PublicUser $wife): self
-    {
-        $this->wife = $wife;
+        $this->payment = $payment;
 
         return $this;
     }
@@ -129,26 +133,22 @@ class Mariage
         return $this;
     }
 
-    public function getPayment(): ?string
+    public function getVadiny(): ?PublicUser
     {
-        return $this->payment;
+        return $this->vadiny;
     }
 
-    public function setPayment(?string $payment): self
+    public function setVadiny(?PublicUser $vadiny): self
     {
-        $this->payment = $payment;
+        $this->vadiny = $vadiny;
 
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
 
-    public function setStatus(?string $status): self
+    public function setMother(?PublicUser $mother): self
     {
-        $this->status = $status;
+        $this->mother = $mother;
 
         return $this;
     }
@@ -165,14 +165,26 @@ class Mariage
         return $this;
     }
 
-    public function getMariageDate(): ?\DateTimeInterface
+    public function getMaty(): ?PublicUser
     {
-        return $this->mariageDate;
+        return $this->maty;
     }
 
-    public function setMariageDate(\DateTimeInterface $mariageDate): self
+    public function setMaty(?PublicUser $maty): self
     {
-        $this->mariageDate = $mariageDate;
+        $this->maty = $maty;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
