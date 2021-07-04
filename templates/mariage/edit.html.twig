@@ -3,6 +3,18 @@
 {% block title %}Edit Mariage
 {% endblock %}
 
+{% block javascripts %}
+
+	<script>
+		$(document).ready(function () {
+$(".submitMariage").click(function () {
+$("#formMariage").submit();
+});
+});
+	</script>
+
+{% endblock %}
+
 {% block body %}
 	<div class="container" style="margin-top:150px">
 
@@ -10,8 +22,61 @@
 
 		{{ include('mariage/_form.html.twig', {'button_label': 'Update'}) }}
 
-		<a href="{{ path('mariage_index') }}">back to list</a>
+		{# <a href="{{ path('mariage_index') }}">back to list</a>
+								
+										{{ include('mariage/_delete_form.html.twig') }} #}
 
-		{{ include('mariage/_delete_form.html.twig') }}
+		<!-- The Modal -->
+			<div class="modal" id="myModal"> <div class="modal-dialog">
+				<div
+					class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Payment Verification</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						Modal body..
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal" id="myModalSendEmail">
+			<div class="modal-dialog">
+				<div
+					class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Send Email</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						Modal body..
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary submitMariage" data-dismiss="modal">Done</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
 	</div>
 {% endblock %}

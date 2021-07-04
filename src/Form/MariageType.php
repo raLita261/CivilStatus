@@ -17,11 +17,7 @@ class MariageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('declarationDate', DateTimeType::class, [
-                'widget' => 'single_text',
-                'required' => false,
 
-            ])
             ->add('mariageDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'required' => false,

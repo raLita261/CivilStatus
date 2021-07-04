@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Request Mariage Certificate
+{% endblock %}
+{% block javascripts %}
+
+	<script>
+		$(document).ready(function () { /*alert("tonga et o ela");
+var AllSelect = document.querySelectorAll("select");
+// console.log("Ny alavany " + AllSelect.length())
+
+AllSelect.forEach((el) => {
+el.css("pointer-event", "none");
+});*/
+
+const husbandValue = $('#mariage_husband').val();
+const wifeValue = $('#mariage_wife').val();
+const temoinValue = $('#mariage_temoin').val();
+// alert(husbandValue);
+
+// $('.husband').val(husbandValue);
+// $('.wife').val(wifeValue);
+// $('.temoin').val(temoinValue);
+$('#mariage_payment').val('');
+});
+	</script>
+
+{% endblock %}
+{% block body %}
+	<div class="container" style="margin-top:150px">
+
+		<h1>Update Request Mariage Certificate</h1>
+
+		{{ form_start(form) }}
+
+		<div class="form-group">
+			<label for="exampleInputEmail1">Mariage Date</label>
+			{{ form_widget(form.mariageDate,{'attr':{'class':'form-control ' , readonly : true}}) }}
+
+		</div>
+
+		<div class="form-group d-none">
+			<label for="exampleInputEmail1">Husband ID</label>
+			{{ form_widget(form.husband,{'attr':{'class':'form-control '  }}) }}
+
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputEmail1">Husband (
+				{{mariage.husband.id }}
+				)</label>
+			<input class="form-control husband" value="{{mariage.husband.fname}} {{mariage.husband.lname}}" readonly/>
+
+		</div>
+
+
+		<div class="form-group d-none">
+			<label for="exampleInputEmail1">Wife ID</label>
+			{{ form_widget(form.wife,{'attr':{'class':'form-control'}}) }}
+
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputEmail1">Wife (
+				{{mariage.wife.id }})
+			</label>
+			<input class="form-control wife" value="{{mariage.wife.fname}} {{mariage.wife.lname}}" readonly/>
+
+		</div>
+
+
+		<div class="form-group d-none">
+			<label for="exampleInputEmail1">Temoin ID</label>
+			{{ form_widget(form.temoin,{'attr':{'class':'form-control '}}) }}
+
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputEmail1">Temoin (
+				{{mariage.temoin.id }}
+				)</label>
+			<input class="form-control temoin" value="{{mariage.temoin.fname}} {{mariage.temoin.lname}}" readonly/>
+
+		</div>
+
+
+		<div class="form-group">
+			<label for="exampleInputEmail1">Payment reference</label>
+			{{ form_widget(form.payment,{'attr':{'class':'form-control' , required:true}}) }}
+
+		</div>
+		<div class="form-group d-none">
+			<label for="exampleInputEmail1">Status</label>
+			{{ form_widget(form.status,{'attr':{'class':'form-control'}}) }}
+
+		</div>
+
+		<div class="form-group d-none">
+			<label for="exampleInputEmail1">Office Location</label>
+			{{ form_widget(form.officeLocation,{'attr':{'class':'form-control'}}) }}
+
+		</div>
+
+
+		<div class="form-group d-none">
+			<label for="exampleInputEmail1">Officer</label>
+			{{ form_widget(form.officier,{'attr':{'class':'form-control'}}) }}
+
+		</div>
+		<button class="btn btn-success">{{ button_label|default('Save') }}</button>
+		{{ form_end(form) }}
+
+		{# <a href="{{ path('mariage_index') }}">back to list</a> #}
+	</div>
+{% endblock %}

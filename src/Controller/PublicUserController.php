@@ -61,6 +61,20 @@ class PublicUserController extends AbstractController
         //fetch all mariage user certificate 
         // $fecthPublicUserlMariageCertificate = $entityManager->getRepository('App:Mariage')->findBy(['publicUser' => $userDetails]);
 
+
+
+        //get on mariage data
+        $fecthUserHusbandMariage = $entityManager->getRepository('App:Mariage')->findOneBy(['husband' => $user]);
+
+        //if husband is null
+        if ($fecthUserHusbandMariage == null) {
+            $fecthUserWifeMariage = $entityManager->getRepository('App:Mariage')->findOneBy(['wife' => $user]);
+            $userMariageCertificate = $fecthUserWifeMariage;
+        } else {
+            $userMariageCertificate = $fecthUserHusbandMariage;
+        }
+
+
         return $this->render('public_user/index.html.twig', [
             'public_users' => $AllPublicUser,
             'birthList' => $fecthAllBirth,
@@ -70,6 +84,7 @@ class PublicUserController extends AbstractController
             'deathList' => $fecthAllDeath,
             //'userMariageCertificate' => $fecthPublicUserlMariageCertificate,
             'user' => $user,
+            'userMariageCertificate' => $userMariageCertificate
 
         ]);
     }

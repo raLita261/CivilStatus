@@ -24,10 +24,10 @@
 					<div class="intro-heading text-uppercase">
 						<span>It's Nice To Meet You</span>
 					</div>
-
-					<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" data-toggle="modal" data-target="#guestModal">Guest</a>
-					<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" data-toggle="modal" data-target="#exampleModal">Login</a>
-
+					{% if app.user %}
+						{% else %}
+							<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" role="button" data-toggle="modal" data-target="#exampleModal">Login</a>
+					{% endif %}
 
 				</div>
 			</div>

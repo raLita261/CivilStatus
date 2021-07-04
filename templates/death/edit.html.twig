@@ -10,8 +10,34 @@
 
 		{{ include('death/_form.html.twig', {'button_label': 'Update'}) }}
 
-		<a href="{{ path('death_index') }}">back to list</a>
+		<!-- The Modal -->
+		<div class="modal" id="myModal">
+			<div class="modal-dialog">
+				<div
+					class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Payment Verification</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						Modal body..
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		{# <a href="{{ path('death_index') }}">back to list</a> #}
 		{# 
-		    {{ include('death/_delete_form.html.twig') }} #}
+				    {{ include('death/_delete_form.html.twig') }} #}
 	</div>
 {% endblock %}
