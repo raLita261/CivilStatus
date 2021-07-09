@@ -27,8 +27,16 @@ class MariageType extends AbstractType
                 // looks for choices from this entity
                 'class' => PublicUser::class,
                 'placeholder' => 'Choose Husband',
+                'query_builder' => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('pu')
+                        ->where('pu.isMaried != :value')
+                        ->andWhere('pu.gender != :valueGender')
+                        ->setParameters(['value' => true, 'valueGender' => false]);
+                },
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label' => function ($pu) {
+                    return $pu->getId() . " - " . $pu->getFname() . " " . $pu->getLname();
+                },
 
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
@@ -47,8 +55,17 @@ class MariageType extends AbstractType
                 // looks for choices from this entity
                 'class' => PublicUser::class,
                 'placeholder' => 'Choose Wife',
+
+                'query_builder' => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('pu')
+                        ->where('pu.isMaried != :value')
+                        ->andWhere('pu.gender != :valueGender')
+                        ->setParameters(['value' => true, 'valueGender' => true]);
+                },
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label' => function ($pu) {
+                    return $pu->getId() . " - " . $pu->getFname() . " " . $pu->getLname();
+                },
 
 
                 // used to render a select box, check boxes or radios
@@ -59,8 +76,12 @@ class MariageType extends AbstractType
                 // looks for choices from this entity
                 'class' => PublicUser::class,
                 'placeholder' => 'Choose Temoin',
+
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label'  => function ($pu) {
+                    return $pu->getId() . " - " . $pu->getFname() . " " . $pu->getLname();
+                },
+
 
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
@@ -73,6 +94,7 @@ class MariageType extends AbstractType
                 'choices'  => [
                     'Pending' => 'Pending',
                     'Approved' => 'Approved',
+                    'Failed' => 'Failed',
                 ],
             ]);
     }

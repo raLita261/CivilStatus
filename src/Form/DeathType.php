@@ -35,7 +35,10 @@ class DeathType extends AbstractType
                 'class' => PublicUser::class,
                 'placeholder' => 'Choose Epoux',
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label'  => function ($pu) {
+                    return $pu->getId() . " - " . $pu->getFname() . " " . $pu->getLname();
+                },
+
 
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
@@ -46,7 +49,11 @@ class DeathType extends AbstractType
                 'class' => PublicUser::class,
                 'placeholder' => 'Choose ID',
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label'  => function ($pu) {
+                    return $pu->getId() . " - " . $pu->getFname() . " " . $pu->getLname();
+                },
+
+
 
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
@@ -58,7 +65,10 @@ class DeathType extends AbstractType
                 'class' => PublicUser::class,
                 'placeholder' => 'Choose ID',
                 // uses the User.username property as the visible option string
-                'choice_label' => 'id',
+                'choice_label'  => function ($pu) {
+                    return $pu->getId() . " - " . $pu->getFname() . " " . $pu->getLname();
+                },
+
 
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,

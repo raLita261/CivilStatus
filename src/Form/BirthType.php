@@ -29,6 +29,7 @@ class BirthType extends AbstractType
                 'choices'  => [
                     'Pending' => 'Pending',
                     'Approved' => 'Approved',
+                    'Failed' => 'Failed',
                 ],
             ]);
     }

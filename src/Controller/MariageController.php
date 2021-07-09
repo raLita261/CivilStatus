@@ -40,8 +40,10 @@ class MariageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $mariage->setDeclarationDate($date);
+            //get mariage details
+            $mariage->getHusband()->setIsMaried(true);
+            $mariage->getWife()->setIsMaried(true);
             $entityManager->persist($mariage);
-
             $entityManager->flush();
 
             return $this->redirectToRoute('public_user_index');

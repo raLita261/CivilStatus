@@ -69,16 +69,21 @@ class PublicUser
      */
     private $motherOccupation;
 
-
-
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User")
      */
     private $user;
+
     /**
      * @ORM\Column(type="boolean")
      */
     private $gender;
+
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMaried;
 
 
     public function getId(): ?int
@@ -226,6 +231,18 @@ class PublicUser
     public function setGender(bool $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getIsMaried(): ?bool
+    {
+        return $this->isMaried;
+    }
+
+    public function setIsMaried(bool $isMaried): self
+    {
+        $this->isMaried = $isMaried;
 
         return $this;
     }
