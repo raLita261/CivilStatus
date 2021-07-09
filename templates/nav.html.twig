@@ -9,9 +9,16 @@
 				<li class="nav-item">
 					<a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Home</a>
 				</li>
+				{% if app.user %}
+					{% else %}
 
+						<li class="nav-item">
+							<a class="nav-link js-scroll-trigger" href="{{ path('app_register') }}">Sign Up</a>
+						</li>
+				{% endif %}
 
 				{% if app.user %}
+
 					{% if app.user.title == true %}
 						<li class="nav-item">
 							<a class="nav-link js-scroll-trigger" href="{{ path('public_user_index') }}">List
@@ -28,7 +35,7 @@
 							<div
 								class="dropdown-menu" style="right:15rem!important;left:auto!important; transition:0.4s; font-size:0.9rem;top:auto!important; border: 2px solid #DD8E40 !important; padding:5rem !imporant; " aria-labelledby="navbarDropdown">
 								{# <a class="dropdown-item" href="#">Action</a>
-																																																																																																																						<a class="dropdown-item" href="#">Another action</a> #}
+																																																																																																																																																																						<a class="dropdown-item" href="#">Another action</a> #}
 
 								<a class="dropdown-item" href="{{path('app_logout')}}">Logout</a>
 
@@ -48,18 +55,16 @@
 							<div
 								class="dropdown-menu" style="right:15rem!important;left:auto!important; transition:0.4s; font-size:0.9rem;top:auto!important; border: 2px solid #DD8E40 !important; padding:5rem !imporant; " aria-labelledby="navbarDropdown">
 								{# <a class="dropdown-item" href="#">Action</a>
-																																																																																																																						<a class="dropdown-item" href="#">Another action</a> #}
+																																																																																																																																																																						<a class="dropdown-item" href="#">Another action</a> #}
 
 								<a class="dropdown-item" href="{{path('app_logout')}}">Logout</a>
 
 							</div>
 
 						</li>
-					{% else %}
+						{% else %}
 
-						<li class="nav-item">
-							<a class="nav-link js-scroll-trigger" href="{{ path('app_register') }}">Sign Up</a>
-						</li>
+
 					{% endif %}
 				{% endif %}
 
